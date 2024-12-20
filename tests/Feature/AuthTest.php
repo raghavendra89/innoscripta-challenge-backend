@@ -2,10 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class AuthTest extends TestCase
@@ -59,5 +60,51 @@ class AuthTest extends TestCase
         $this->assertDatabaseHas('users', [
             'email' => self::$validUser['email'],
         ]);
+    }
+
+    #[Test]
+    public function it_validates_login_request(): void
+    {
+        $response = $this->postJson(
+                        '/api/login',
+                        ['email' => 'test', 'password' => 'test']
+                    );
+
+        $response->assertStatus(422);
+
+        $response->assertInvalid(['email']);
+    }
+
+    #[Test]
+    public function it_authenticates_the_user(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->postJson(
+                        '/api/login',
+                        ['email' => $user->email, 'password' => 'Test1234!#']
+                    );
+
+        $response->assertStatus(200);
+
+        $response->assertValid();
+
+        $user = $user->toArray();
+        unset($user['email_verified_at']);
+        $response->assertJsonFragment($user);
+
+        $this->assertAuthenticated();
+    }
+
+    #[Test]
+    public function it_logs_out_the_user(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->postJson('/api/logout');
+
+        $response->assertStatus(200);
+
+        $this->assertGuest();
     }
 }
