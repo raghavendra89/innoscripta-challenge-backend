@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Unit\NewsSources;
+namespace Tests\Feature\NewsSource\Sources;
 
-use App\NewsSources\TheGuardian;
+use App\NewsSource\Sources\TheGuardian;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use PHPUnit\Framework\Attributes\Test;

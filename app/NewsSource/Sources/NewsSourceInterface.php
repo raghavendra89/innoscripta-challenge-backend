@@ -1,6 +1,6 @@
 <?php
 
-namespace App\NewsSources;
+namespace App\NewsSource\Sources;
 
 interface NewsSourceInterface
 {
