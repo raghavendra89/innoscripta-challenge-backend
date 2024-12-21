@@ -2,6 +2,7 @@
 
 namespace App\NewsSource\Sources;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 
 class TheGuardian implements NewsSourceInterface
@@ -21,6 +22,30 @@ class TheGuardian implements NewsSourceInterface
             'api-key' => $this->apiKey
         ])->get($this->apiEndPoint, ['lang' => 'en']);
 
-        return $response->json();
+        return $this->formatArticles($response->json()['response']['results']);
+    }
+
+    private function formatArticles($articles)
+    {
+        $formattedArticles = [];
+
+        foreach ($articles as $article) {
+            $formatArticles[] = [
+                'title' => $article['webTitle'],
+                'summary' => NULL,
+                // Content is not available in this API
+                'content' => '',
+                'url' => $article['webUrl'],
+                'image' => NULL,
+                'author' => NULL,
+                'source' => 'The Guardian',
+                'news_source' => 'TheGuardian',
+                // Is this the right category?
+                'categories' => $article['pillarName'],
+                'published_at' => Carbon::parse($article['webPublicationDate'])
+            ];
+        }
+
+        return $formatArticles;
     }
 }

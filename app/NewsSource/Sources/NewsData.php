@@ -2,6 +2,7 @@
 
 namespace App\NewsSource\Sources;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 
 class NewsData implements NewsSourceInterface
@@ -22,6 +23,29 @@ class NewsData implements NewsSourceInterface
             'language' => 'en'
         ]);
 
-        return $response->json();
+        return $this->formatArticles($response->json()['results']);
+    }
+
+    private function formatArticles($articles)
+    {
+        $formattedArticles = [];
+
+        foreach ($articles as $article) {
+            $formatArticles[] = [
+                'title' => $article['title'],
+                'summary' => $article['description'],
+                // Content is not available for free plans in this API
+                'content' => '',
+                'url' => $article['link'],
+                'image' => $article['image_url'],
+                'author' => $article['creator'] ? $article['creator'][0] : NULL,
+                'source' => $article['source_name'],
+                'news_source' => 'Newsdata',
+                'categories' => $article['category'] ? implode(',', $article['category']) : NULL,
+                'published_at' => Carbon::parse($article['pubDate'])
+            ];
+        }
+
+        return $formatArticles;
     }
 }
