@@ -23,7 +23,6 @@ class NewsApiTest extends TestCase
         $newsApi->getArticles();
 
         // Assert that it makes the request to the right url and with right api key header
-        // Assert that it is not sending any query params
         Http::assertSent(function (Request $request) {
             return $request->hasHeader('X-Api-Key') &&
                    strtok($request->url(), '?') == 'https://newsapi.org/v2/top-headlines' &&

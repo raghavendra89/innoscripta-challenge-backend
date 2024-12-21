@@ -23,7 +23,6 @@ class NyTimesTest extends TestCase
         $nyTimes->getArticles();
 
         // Assert that it makes the request to the right url and with right api key header
-        // Assert that it is not sending any query params
         Http::assertSent(function (Request $request) {
             return strtok($request->url(), '?') == 'https://api.nytimes.com/svc/search/v2/articlesearch.json' &&
                    $request->method() == 'GET' &&

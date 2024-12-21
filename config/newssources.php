@@ -41,5 +41,19 @@ return [
     'nytimes' => [
         'api_key' => env('NY_TIMES_API_KEY', ''),
         'api_endpoint' => 'https://api.nytimes.com/svc/search/v2/articlesearch.json'
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | NewsData.io API details
+    |--------------------------------------------------------------------------
+    |
+    | Configuration details required to make the API request to the NewsData.io.
+    |
+    */
+
+    'newsdata' => [
+        'api_key' => env('NEWSDATA_API_KEY', ''),
+        'api_endpoint' => 'https://newsdata.io/api/1/latest'
     ]
 ];
