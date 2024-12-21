@@ -20,12 +20,26 @@ return [
     | TheGuardian API details
     |--------------------------------------------------------------------------
     |
-    | Configuration details required to make the API request to NewsAPI.
+    | Configuration details required to make the API request to The Guardian.
     |
     */
 
     'theguardian' => [
         'api_key' => env('THE_GUARDIAN_API_KEY', ''),
         'api_endpoint' => 'https://content.guardianapis.com/search'
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | NewYorck Times API details
+    |--------------------------------------------------------------------------
+    |
+    | Configuration details required to make the API request to the NewYork Times.
+    |
+    */
+
+    'nytimes' => [
+        'api_key' => env('NY_TIMES_API_KEY', ''),
+        'api_endpoint' => 'https://api.nytimes.com/svc/search/v2/articlesearch.json'
     ]
 ];
