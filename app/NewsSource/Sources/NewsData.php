@@ -31,7 +31,7 @@ class NewsData implements NewsSourceInterface
         $formattedArticles = [];
 
         foreach ($articles as $article) {
-            $formatArticles[] = [
+            $formattedArticles[] = [
                 'title' => $article['title'],
                 'summary' => $article['description'],
                 // Content is not available for free plans in this API
@@ -46,6 +46,6 @@ class NewsData implements NewsSourceInterface
             ];
         }
 
-        return $formatArticles;
+        return $formattedArticles;
     }
 }

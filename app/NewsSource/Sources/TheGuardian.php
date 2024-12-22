@@ -30,7 +30,7 @@ class TheGuardian implements NewsSourceInterface
         $formattedArticles = [];
 
         foreach ($articles as $article) {
-            $formatArticles[] = [
+            $formattedArticles[] = [
                 'title' => $article['webTitle'],
                 'summary' => NULL,
                 // Content is not available in this API
@@ -46,6 +46,6 @@ class TheGuardian implements NewsSourceInterface
             ];
         }
 
-        return $formatArticles;
+        return $formattedArticles;
     }
 }

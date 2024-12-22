@@ -34,7 +34,7 @@ class NewsApi implements NewsSourceInterface
                 continue;
             }
 
-            $formatArticles[] = [
+            $formattedArticles[] = [
                 'title' => $article['title'],
                 'summary' => $article['description'],
                 'content' => $article['content'],
@@ -48,6 +48,6 @@ class NewsApi implements NewsSourceInterface
             ];
         }
 
-        return $formatArticles;
+        return $formattedArticles;
     }
 }

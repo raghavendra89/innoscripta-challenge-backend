@@ -16,7 +16,7 @@ class NewsApiTest extends TestCase
     public function it_makes_the_api_request(): void
     {
         Http::fake([
-            'newsapi.org/*' => []
+            'newsapi.org/*' => ['articles' => []]
         ]);
 
         // When you call the API

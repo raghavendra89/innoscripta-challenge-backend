@@ -16,7 +16,7 @@ class TheGuardianTest extends TestCase
     public function it_makes_the_api_request(): void
     {
         Http::fake([
-            'content.guardianapis.com/*' => []
+            'content.guardianapis.com/*' => ['response' => ['results' => []]]
         ]);
 
         // When you call the API

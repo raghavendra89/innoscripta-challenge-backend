@@ -30,7 +30,7 @@ class NyTimes implements NewsSourceInterface
         $formattedArticles = [];
 
         foreach ($articles as $article) {
-            $formatArticles[] = [
+            $formattedArticles[] = [
                 'title' => $article['headline']['main'],
                 'summary' => $article['snippet'],
                 'content' => $article['lead_paragraph'],
@@ -44,6 +44,6 @@ class NyTimes implements NewsSourceInterface
             ];
         }
 
-        return $formatArticles;
+        return $formattedArticles;
     }
 }

@@ -16,7 +16,7 @@ class NewsDataTest extends TestCase
     public function it_makes_the_api_request(): void
     {
         Http::fake([
-            'newsdata.io/*' => []
+            'newsdata.io/*' => ['results' => []]
         ]);
 
         // When you call the API

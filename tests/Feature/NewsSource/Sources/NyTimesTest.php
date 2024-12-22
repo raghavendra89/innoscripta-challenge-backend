@@ -16,7 +16,7 @@ class NyTimesTest extends TestCase
     public function it_makes_the_api_request(): void
     {
         Http::fake([
-            'api.nytimes.com/*' => []
+            'api.nytimes.com/*' => ['response' => ['docs' => []]]
         ]);
 
         // When you call the API
