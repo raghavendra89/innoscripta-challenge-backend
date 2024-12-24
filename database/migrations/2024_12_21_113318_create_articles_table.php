@@ -43,9 +43,7 @@ return new class extends Migration
 
             // Testing: fulltext index is not supported in sqlite
             if (! $this->isSqlite()) {
-                $table->fullText('title');
-                $table->fullText('summary');
-                $table->fullText('content');
+                $table->fullText(['title', 'summary', 'content']);
             }
         });
     }
