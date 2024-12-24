@@ -10,10 +10,8 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    public function getArticles(Request $request): JsonResponse
+    private function buildSearchQuery($articleQuery, Request $request)
     {
-        $articleQuery = Article::query();
-
         // Do a full text search on the key columns
         if ($request->search) {
             $searchStrings = is_array($request->search)
@@ -28,6 +26,15 @@ class NewsController extends Controller
                 }
             }
         }
+
+        return $articleQuery;
+    }
+
+    public function getArticles(Request $request): JsonResponse
+    {
+        $articleQuery = Article::query();
+
+        $articleQuery = $this->buildSearchQuery($articleQuery, $request);
 
         if ($request->sources && is_array($request->sources)) {
             $articleQuery->whereIn('source', $request->sources);
@@ -57,6 +64,9 @@ class NewsController extends Controller
         }
 
         $articleQuery = Article::query();
+
+        $articleQuery = $this->buildSearchQuery($articleQuery, $request);
+
         $preferences = $request->user()->preferences;
 
         if (! empty($preferences->sources)) {
