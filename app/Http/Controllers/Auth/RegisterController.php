@@ -16,7 +16,7 @@ class RegisterController extends Controller
     public function register(Request $request) : UserResource | JsonResponse {
         $request->validate([
             'first_name' => 'required|string|max:255',
-            'last_name' => 'string|max:255',
+            'last_name' => 'nullable|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);

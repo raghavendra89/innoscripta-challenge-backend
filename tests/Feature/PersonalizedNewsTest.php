@@ -35,9 +35,7 @@ class PersonalizedNewsTest extends TestCase
 
         $response = $this->actingAs($user)->get('/api/news/personalized');
 
-        Exceptions::assertReported(function (UserPreferencesNotSetException $e) {
-            return $e->getMessage() === 'User has not set any news preferences.';
-        });
+        $response->assertStatus(422);
     }
 
     #[Test]

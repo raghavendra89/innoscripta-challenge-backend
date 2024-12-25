@@ -2,13 +2,13 @@
 
 namespace App\Exceptions;
 
-use Exception;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class UserPreferencesNotSetException extends Exception
+class UserPreferencesNotSetException extends HttpException
 {
     public function __construct()
     {
         $message = 'User has not set any news preferences.';
-        parent::__construct($message);
+        parent::__construct(422, $message);
     }
 }
