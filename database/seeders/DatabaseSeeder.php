@@ -15,10 +15,14 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'first_name' => 'Admin',
-            'email' => 'admin@newsfeed.io',
-            'password' => Hash::make('password'),
-        ]);
+        try {
+            User::factory()->create([
+                'first_name' => 'Admin',
+                'email' => 'admin@newsfeed.io',
+                'password' => Hash::make('password'),
+            ]);
+        } catch (\Exception $e) {
+            
+        }
     }
 }
