@@ -15,15 +15,15 @@ class UserPreferenceResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $sources = Arr::where(explode(',', $this->sources), function ($source) {
+        $sources = Arr::where(explode(',', $this->sources ?? ''), function ($source) {
             return ! empty($source);
         });
 
-        $categories = Arr::where(explode(',', $this->categories), function ($category) {
+        $categories = Arr::where(explode(',', $this->categories ?? ''), function ($category) {
             return ! empty($category);
         });
 
-        $authors = Arr::where(explode(',', $this->authors), function ($author) {
+        $authors = Arr::where(explode(',', $this->authors ?? ''), function ($author) {
             return ! empty($author);
         });
 

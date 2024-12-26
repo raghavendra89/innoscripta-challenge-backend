@@ -21,6 +21,13 @@ class ArticleResource extends JsonResource
         $article['summary'] = $article['summary'] ?? $article['title'];
         $article['image'] = $article['image'] ?? 'https://picsum.photos/id/'. rand(1, 50) .'/300/200';
 
+        if (
+            strpos($article['image'], 'http') === false
+            && strtolower($article['news_source']) == 'nytimes'
+        ) {
+            $article['image'] = 'https://static01.nyt.com/' . $article['image'];
+        }
+
         return $article;
     }
 }
