@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\NewsController;
@@ -25,6 +26,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/news/personalized', [NewsController::class, 'getPersonalizedArticles']);
 
+    Route::get('/admin/data', [AdminController::class, 'getData']);
+    Route::post('/admin/pull-news', [AdminController::class, 'pullNews']);
 });
 
 Route::get('/user', function (Request $request) {
