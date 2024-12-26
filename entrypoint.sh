@@ -4,6 +4,8 @@ set -e
 
 echo "In entry point"
 
-php artisan key:generate
+php artisan key:generate --silent
 
-php artisan migrate
+php artisan migrate --force
+
+exec "$@"
