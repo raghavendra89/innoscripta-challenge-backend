@@ -20,9 +20,10 @@ class DatabaseSeeder extends Seeder
                 'first_name' => 'Admin',
                 'email' => 'admin@newsfeed.io',
                 'password' => Hash::make('password'),
+                'is_admin' => true
             ]);
         } catch (\Exception $e) {
-            
+
         }
     }
 }
