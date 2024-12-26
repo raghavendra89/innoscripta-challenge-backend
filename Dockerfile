@@ -6,14 +6,15 @@ FROM composer:lts AS composer
 COPY composer.json /app
 COPY composer.lock /app
 
+COPY . /app/
+
 RUN composer install        \
     --ignore-platform-reqs  \
     --no-ansi               \
-    --no-autoloader         \
     --no-interaction        \
     --no-scripts
 
-COPY . /app/
+
 RUN composer dump-autoload --optimize --classmap-authoritative
 
 ### Composer
@@ -45,11 +46,15 @@ RUN chown -R www-data:www-data \
 
 WORKDIR /var/www/html
 
-# Expose port 8000
+COPY .env.example .env
+
+# Expose port 9000
 EXPOSE 9000
 
 # Start Apache
 # CMD ["apache2-foreground"]
+
+CMD bash -c "composer install --no-dev"
 
 CMD php artisan serve --host=0.0.0.0 --port=9000
 

@@ -8,4 +8,6 @@ php artisan key:generate --silent
 
 php artisan migrate --force
 
+php artisan db:seed
+
 exec "$@"
